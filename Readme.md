@@ -23,6 +23,8 @@ This repository is used to build [Atlassian Jira](https://www.atlassian.com/soft
 
 * /opt/atlassian-home
 
+When SSL database connection is selected, a file called `database.cert` with the certificate used by the database must be stored in the atlassian-home directory.
+
 ### Download
 
     docker pull inclusivedesign/jira
@@ -34,9 +36,9 @@ This repository is used to build [Atlassian Jira](https://www.atlassian.com/soft
 ```
 docker run \
 -d \
--p 8080:8080 \
+-p 80:8080 \
 --name="jira" \
--e "DATABASE_URL=postgresql://jira_user:jira_pw@172.17.0.1/jiradb" \
+-e "DATABASE_URL=postgresql://jira_user:jira_pw@172.17.0.1/jiradb?ssl=true" \
 -v $PWD/data/jira-home:/opt/atlassian-home/ \
 inclusivedesign/jira
 ```

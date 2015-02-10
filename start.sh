@@ -148,7 +148,7 @@ if [ -n "$DATABASE_URL" ]; then
 END
 fi
 
-/usr/bin/keytool -import -alias database -file /opt/atlassian-home/database.cert -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+[ -f /opt/atlassian-home/database.cert ] && /usr/bin/keytool -import -alias database -file /opt/atlassian-home/database.cert -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
 
 cat >/etc/supervisord.d/jira.ini<<EOF
 [program:jira]
