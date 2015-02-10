@@ -79,7 +79,7 @@ extract_database_url() {
       fi
       local host_port_name="$(read_var $prefix HOST):$(read_var $prefix PORT)/$(read_var $prefix NAME)"
       local jdbc_driver="org.postgresql.Driver"
-      local jdbc_url="jdbc:postgresql://$host_port_name"
+      local jdbc_url="jdbc:postgresql://$host_port_name?ssl=true"
       local hibernate_dialect="org.hibernate.dialect.PostgreSQLDialect"
       local database_type="postgres72"
       ;;
@@ -148,8 +148,10 @@ if [ -n "$DATABASE_URL" ]; then
 END
 fi
 
+/usr/bin/keytool -import -alias database -file /opt/atlassian-home/database.cert -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -noprompt
+
 cat >/etc/supervisord.d/jira.ini<<EOF
-[program:nginx]
+[program:jira]
 command=/opt/jira/bin/start-jira.sh -fg
 user=jira
 autorestart=true

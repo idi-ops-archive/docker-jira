@@ -1,8 +1,9 @@
 FROM inclusivedesign/java:openjdk-7
 
-ENV JIRA_VERSION 6.3.13
+#ENV JIRA_VERSION 6.3.13
+ENV JIRA_VERSION 5.2.11
 
-RUN yum -y install tar xmlstarlet && \
+RUN yum -y install tar xmlstarlet java-1.7.0-openjdk && \
     yum clean all && \
     /usr/sbin/groupadd atlassian && \
 	mkdir -p /opt/atlassian-home && \
